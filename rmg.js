@@ -10,7 +10,7 @@ const latinNames = ['Acutus', 'Albidens', 'Branchia', 'Brittanicus', 'Calvus', '
 //Blank array to store the newly discovered species
 let newSpecies = [];
 
-//Random number generator function - takes in an arrays as an input and uses this to generate a random number that will can choose and entry in the array. 
+//Random number generator function - takes in an arrays as an input and uses this to generate a random number that can choose any entry in the array. 
 const randomNum = (array) => {
     return Math.floor(Math.random() * (array.length));
 }
@@ -48,6 +48,36 @@ const generateNewSpecies = (array) => {
     return newSpecies.push(getNewAnimal(getNewName(nameInitial, latinNames), head, body, arms, legs));
 }
 
+//Function to calculate the weight of the new animal - the weight is simple the average of the weighted weights of all parts. For example - head accounts for 15% of the total weight, the body 50%, the arms 15% and the legs 20%. Takes in newSpecies object and compares against the animalArray
+const getWeight = (obj, arr) => {
+    let weight = 0;
+    for (let i = 0; i < arr.length - 1; i++){
+        //calculate the head weight
+        if (arr[i].species === obj.head){
+            weight += (arr[i].weight * 0.15);
+            //console.log(weight);
+        }
+        //calculate the body weight
+        if (arr[i].species === obj.body){
+            weight += (arr[i].weight * 0.5);
+            //console.log(weight);
+        }
+        //calculate the arms weight
+        if (arr[i].species === obj.arms){
+            weight += (arr[i].weight * 0.15);
+            //console.log(weight);
+        }
+        //calculate the legs weight
+        if (arr[i].species === obj.legs){
+            weight += (arr[i].weight * 0.2);
+            //console.log(weight);
+        }
+    }
+    return `${weight}kg`;
+}
+
+
 
 generateNewSpecies(animalArray);
 console.log(newSpecies[0]);
+console.log(getWeight(newSpecies[0], animalArray));
