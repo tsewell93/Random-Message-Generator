@@ -45,7 +45,9 @@ const generateNewSpecies = (array) => {
         legs = array[randomNum(array)].species;
     }
     //run the function getNewAnimal to store the new species characteristics in an object
-    return newSpecies = getNewAnimal(getNewName(nameInitial, latinNames), head, body, arms, legs);
+    newSpecies = getNewAnimal(getNewName(nameInitial, latinNames), head, body, arms, legs);
+    console.log(`A new species has been discovered! ${newSpecies.speciesName} has the head of a ${newSpecies.head}, the body of a ${newSpecies.body}, the arms of a ${newSpecies.arms} and the legs of a ${newSpecies.legs}! It has an average height of ${getHeight(newSpecies, animalArray)} and an average weight of ${getWeight(newSpecies, animalArray)}.`)
+    return newSpecies;
 }
 
 //Function to calculate the weight of the new animal - the weight is simple the average of the weighted weights of all parts. For example - head accounts for 15% of the total weight, the body 50%, the arms 15% and the legs 20%. Takes in newSpecies object and compares against the animalArray
@@ -99,10 +101,4 @@ const getHeight = (obj, arr) => {
     return `${height}m`;
 }
 
-
-
-
 generateNewSpecies(animalArray);
-console.log(newSpecies);
-console.log(getWeight(newSpecies, animalArray));
-console.log(getHeight(newSpecies, animalArray));
