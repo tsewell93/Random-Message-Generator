@@ -46,8 +46,6 @@ const generateNewSpecies = (array) => {
     }
     //run the function getNewAnimal to store the new species characteristics in an object
     newSpecies = getNewAnimal(getNewName(nameInitial, latinNames), head, body, arms, legs);
-    console.log(`A new species has been discovered! ${newSpecies.speciesName} has the head of a ${newSpecies.head}, the body of a ${newSpecies.body}, the arms of a ${newSpecies.arms} and the legs of a ${newSpecies.legs}! It has an average height of ${getHeight(newSpecies, animalArray)} and an average weight of ${getWeight(newSpecies, animalArray)}.`)
-    return newSpecies;
 }
 
 //Function to calculate the weight of the new animal - the weight is simple the average of the weighted weights of all parts. For example - head accounts for 15% of the total weight, the body 50%, the arms 15% and the legs 20%. Takes in newSpecies object and compares against the animalArray
@@ -101,4 +99,56 @@ const getHeight = (obj, arr) => {
     return `${height}m`;
 }
 
+//Grammar check function - returns true if an animals name starts with a vowel and false for all other cases
+const checkName = (string) => {
+    const vowels = ['A', 'E', 'I', 'O', 'U'];
+    for (let i = 0; i < vowels.length; i++){
+        if (string[0] === vowels[i]){
+            return true;
+        }
+    }
+    return false;
+}
+
+//function to build the message from newSpecies, using the grammar check function to ensure correct grammar. 
+const buildMessage = (species) => {
+    let messageA = "A new species has been discovered!"
+    let messageB;
+    let messageC;
+    let messageD;
+    let messageE;
+    //check grammer
+    if (checkName(species.head)){
+        messageB = `${species.speciesName} has the head of an ${species.head}`
+    }
+    else {
+        messageB = `${species.speciesName} has the head of a ${species.head}`
+    }
+    //check grammar
+    if (checkName(species.body)){
+        messageC = `the body of an ${species.body}`
+    }
+    else {
+        messageC = `the body of a ${species.body}`
+    }
+    //check grammar
+    if (checkName(species.arms)){
+        messageD = `the arms of an ${species.arms}`
+    }
+    else {
+        messageD = `the arms of a ${species.arms}`
+    }
+    //check grammar
+    if (checkName(species.legs)){
+        messageE = `the legs of an ${species.legs}`
+    }
+    else {
+        messageE = `the legs of a ${species.legs}`
+    }
+    //Output the message
+    console.log(`${messageA} ${messageB}, ${messageC}, ${messageD}, and ${messageE}. It has an average height of ${getHeight(newSpecies, animalArray)} and an average weight of ${getWeight(newSpecies, animalArray)}.`)
+    
+}
+
 generateNewSpecies(animalArray);
+buildMessage(newSpecies);
